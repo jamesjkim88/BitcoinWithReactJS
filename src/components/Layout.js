@@ -3,8 +3,11 @@ import Navbar from "./Navbar";
 import Exchange from "./Exchange";
 
 export default class Layout extends React.Component{
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
+        this.state = {
+            amount: 0
+        }
     }
 
     render(){
