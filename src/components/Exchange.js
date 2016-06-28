@@ -16,6 +16,7 @@ export default class Exchange extends React.Component{
                             <button className="button" id="btcBox">
                                 BTC
                             </button>
+                            <Currency />
                             <button className="button">Search</button>
                         </form>
                     </div>
