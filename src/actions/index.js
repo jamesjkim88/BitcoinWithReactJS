@@ -1,9 +1,16 @@
-import dispatcher from "../dispatcher";
+import axios from "axios";
+import config from "../../config.json";
 
-export function ajaxCall(){
-    axios("https://api.github.com/search/repositories?q=reactjs").then((data) =>{
-        console.log("data: ", data);
-    }, (data) =>{
-        console.log("error", data);
-    })
-}
+const rootUrl = config.rootUrl;
+const apiKey = config.apiKey;
+
+const FETCH_BITCOIN = "FETCH_BITCOIN";
+
+export function fetchBitcoin(currency) {
+    const url = `${rootUrl}?currency=${currency}&mashape-key=${apiKey}`;
+    const request = axios.get(url);
+    return{
+        type: FETCH_BITCOIN,
+        payload: request
+    };
+};

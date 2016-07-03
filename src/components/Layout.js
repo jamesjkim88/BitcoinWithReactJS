@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "./Navbar";
-import Exchange from "./Exchange";
+import Exchange from "../containers/Exchange";
 
 export default class Layout extends React.Component{
     constructor(props){

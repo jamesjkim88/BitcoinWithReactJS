@@ -1,6 +1,6 @@
 import React from "react";
 import Amount from "./Amount";
-import Currency from "../components/Currency";
+import Currency from "./Currency";
 
 export default class Exchange extends React.Component{
     constructor(props){

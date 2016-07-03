@@ -1,3 +1,9 @@
-/**
- * Created by jameskim on 7/2/16.
- */
+import {FETCH_BITCOIN} from "../actions/index";
+
+export default function(state = [], action){
+    switch(action.type){
+        case FETCH_BITCOIN:
+            return state.concast([action.payload.data])
+    }
+    return state;
+};

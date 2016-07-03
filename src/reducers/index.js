@@ -1,3 +1,8 @@
-/**
- * Created by jameskim on 7/2/16.
- */
+import {combineReducer} from "redux";
+import BitcoinReducer from "./reducerBitcoin";
+
+const rootReducer = combineReducer({
+    bitcoin: BitcoinReducer
+})
+
+export default rootReducer

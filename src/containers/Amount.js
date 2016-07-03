@@ -1,5 +1,5 @@
 import React from "react";
-import AmountActions from "../actions/AmountActions";
+import AmountActions from "../actions/index";
 
 export default class Amount extends React.Component{
     constructor(props){
