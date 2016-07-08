@@ -1,40 +1,51 @@
 import React from "react";
-import AmountActions from "../actions/index";
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
+import {fetchBitcoin} from "../actions/index"
+import Select from "react-select";
 
-export default class Amount extends React.Component{
+var options = [
+    { value: 'one', label: 'USD' },
+    { value: 'two', label: 'KRW' }
+];
+
+class Amount extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            amount: 0,
-            currency: "USD"
+            amount: 0
         }
     }
 
-    onInputChange(amount){
+    onInputChange(amount) {
         this.setState({amount});
         console.log(amount);
     }
-    
-    // ajaxCall(amount, currency){
-    //     this.setState({amount});
-    //     console.log(amount);
-    //     var xhr = new XMLHttpRequest();
-    //     xhr.open('GET', 'https://montanaflynn-bitcoin-exchange-rate.p.mashape.com/prices/spot_rate?currency=USD&mashape-key=4gN0HY6RLTmshjwm5OsfyaRS5PBLp1yxVacjsnlOdcza7YSwGS');
-    //     xhr.addEventListener('readystatechange', function () {
-    //             if (xhr.readyState === 4) {
-    //                 console.log("data: ", JSON.parse(xhr.responseText));
-    //                 var data = JSON.parse(xhr.responseText);
-    //                 var total = data.amount * amount;
-    //                 console.log(total.toFixed(2));
-    //             }
-    //             });
-    //         xhr.send();
-    //         console.log('Made the call');
-    // }
-
+    onAmountEntered(evt){
+        evt.preventDefault();
+        this.props.fetchBitcoin(this.state.amount);
+        this.setState({amount: " "});
+    }
     render(){
+        const center = {
+            margin: "0 auto"
+        }
         return(
-            <input className="textBox" id="amount" type="text" value={this.state.amount} onChange={(evt) => this.onInputChange(evt.target.value)} />
+            <form onSubmit={this.onAmountEntered.bind(this)} className="input-group" style={center}>
+                <input className="textBox" id="amount" type="text" value={this.state.amount} onChange={(evt) => this.onInputChange(evt.target.value)} />
+                <Select
+                    name="form-field-name"
+                    value="one"
+                    options={options}
+                />
+                <button className="btn btn-primary">Search</button>
+            </form>
         )
     }
 }
+
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({fetchBitcoin}, dispatch);
+};
+
+export default connect(null, mapDispatchToProps)(Amount);
