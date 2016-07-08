@@ -1,8 +1,7 @@
 import axios from "axios";
-import config from "../../config.json";
 
-const rootUrl = config.rootUrl;
-const apiKey = config.apiKey;
+const rootUrl = "https://montanaflynn-bitcoin-exchange-rate.p.mashape.com/prices/spot_rate";
+const apiKey = "4gN0HY6RLTmshjwm5OsfyaRS5PBLp1yxVacjsnlOdcza7YSwGS";
 
 const FETCH_BITCOIN = "FETCH_BITCOIN";
 
