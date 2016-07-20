@@ -4,10 +4,7 @@ import {bindActionCreators} from "redux";
 import {fetchBitcoin} from "../actions/index"
 import Select from "react-select";
 
-var options = [
-    { value: 'one', label: 'USD' },
-    { value: 'two', label: 'KRW' }
-];
+
 
 class Amount extends React.Component{
     constructor(props){
@@ -18,8 +15,8 @@ class Amount extends React.Component{
     }
 
     onInputChange(amount) {
-        this.setState({amount});
         console.log(amount);
+        this.setState({amount});
     }
     onAmountEntered(evt){
         evt.preventDefault();
@@ -27,9 +24,13 @@ class Amount extends React.Component{
         this.setState({amount: " "});
     }
     render(){
+        var options = [
+            { value: 'one', label: 'USD' },
+            { value: 'two', label: 'KRW' }
+        ];
         const center = {
             margin: "0 auto"
-        }
+        };
         return(
             <form onSubmit={this.onAmountEntered.bind(this)} className="input-group" style={center}>
                 <input className="textBox" id="amount" type="text" value={this.state.amount} onChange={(evt) => this.onInputChange(evt.target.value)} />

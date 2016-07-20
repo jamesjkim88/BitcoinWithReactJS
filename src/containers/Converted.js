@@ -7,9 +7,8 @@ class BitcoinConverted extends Component{
         console.log("data: ", data);
         console.log("fees: ", data.fees);
         const amount = data.amount;
-        const fees = data.fees.map((bitcoin,i) => bitcoin.coinbase.amount);
         return(
-            <li key={i}>{amount}, {fees}</li>
+            <p>{amount}</p>
         )
     }
 
@@ -17,9 +16,7 @@ class BitcoinConverted extends Component{
         console.log(this.props);
         return(
             <div>
-                <ul>
-                    test: {this.props.bitcoin.map(this.renderBTCConverted)}
-                </ul>
+                test: {this.props.bitcoin.map(this.renderBTCConverted)}
             </div>
         )
     }
