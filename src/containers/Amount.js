@@ -3,14 +3,17 @@ import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import {fetchBitcoin} from "../actions/index"
 import Select from "react-select";
-
-
+import Converted from "../containers/Converted";
 
 class Amount extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            amount: 0
+            amount: 0,
+            currency: [
+                {value: 'one', label: 'USD'},
+                {value: 'two', label: 'KRW'}
+            ]
         }
     }
 
@@ -19,9 +22,8 @@ class Amount extends React.Component{
         this.setState({amount});
     }
     onAmountEntered(evt){
-        evt.preventDefault();
-        this.props.fetchBitcoin(this.state.amount);
-        this.setState({amount: " "});
+        console.log(evt.label);
+        this.props.fetchBitcoin(evt.label);
     }
     render(){
         var options = [
@@ -31,16 +33,25 @@ class Amount extends React.Component{
         const center = {
             margin: "0 auto"
         };
+        console.log("options: ", options);
+        console.log("state.curr: ", this.state.currency);
         return(
-            <form onSubmit={this.onAmountEntered.bind(this)} className="input-group" style={center}>
-                <input className="textBox" id="amount" type="text" value={this.state.amount} onChange={(evt) => this.onInputChange(evt.target.value)} />
-                <Select
-                    name="form-field-name"
-                    value="one"
-                    options={options}
-                />
-                <button className="btn btn-primary">Search</button>
-            </form>
+            <div>
+                <form className="input-group" style={center} autoComplete="off">
+                    <input className="textBox" id="amount" value={this.state.amount} type="text" onChange={(evt) => this.onInputChange(evt.target.value)} />
+                    <Select
+                        name="form-field-name"
+                        label="USD" //change to this.state.currency
+                        options={this.state.currency}
+                        onChange={this.onAmountEntered.bind(this)}
+                    />
+                </form>
+                <div>
+                    <Converted
+                        value={this.state.amount}
+                    />
+                </div>
+            </div>
         )
     }
 }

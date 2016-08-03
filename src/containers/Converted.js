@@ -3,20 +3,22 @@ import {connect} from "react-redux";
 
 class BitcoinConverted extends Component{
 
-    renderBTCConverted(data){
-        console.log("data: ", data);
-        console.log("fees: ", data.fees);
-        const amount = data.amount;
-        return(
-            <p>{amount}</p>
-        )
-    }
-
     render(){
-        console.log(this.props);
+        var value = this.props.value;
+        console.log("value: ", value);
+        //calculating the amount
+        var convert = function(data){
+            console.log("data: ", data);
+            const amount = data.amount * value;
+            const currency = data.currency;
+            const key = new Date().getTime();
+            return(
+                <p key={key}>{currency}: {amount} BTC</p>
+            )
+        };
         return(
             <div>
-                test: {this.props.bitcoin.map(this.renderBTCConverted)}
+                {this.props.bitcoin.map(convert)}
             </div>
         )
     }
